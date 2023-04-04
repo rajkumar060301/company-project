@@ -20,7 +20,43 @@ if (isset($_POST['sub'])) {
 
 
 }
-//echo "data not refelect in database";
+    if(isset($_POST['user'])){
+
+//        $myConnection = mysqli_connect("localhost", "root", "", "doctor");
+
+        $read_query = "SELECT fname,lname,email,phone FROM student";
+
+        $data = mysqli_query($connection, $read_query);
+
+        if(mysqli_num_rows($data)>0){
+
+            echo "<table style= border: 1ps solid black>
+
+            <tr>
+            <th>Frist Name</th>
+            <th>Lase Name</th>
+            <th>Eamil</th>
+            <th>Phone</th>";
+
+            while($row = mysqli_fetch_array($data)){
+
+                echo"<tr>";
+
+                echo "<td>".$row['fname']."</td>";
+
+                echo "<td>".$row['lname']."</td>";
+
+                echo "<td>".$row['email']."</td>";
+
+                echo "<td>".$row['phone']."</td>";
+
+
+                echo "</tr>";
+            }
+        } else {
+            echo "Record Not found";
+        }
+    }
 }
 
 
